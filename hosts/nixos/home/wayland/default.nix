@@ -1,12 +1,14 @@
+# Config for my window manager and all wayland specific applications
+
 { pkgs, ... }:
 
 {
   imports = [
-    ./hypr
-    ./waybar
+    ./hypr # Wayland compositor
+    ./waybar # Interactive bar
     ./swaync
     ./tofi
-    ./wlogout
+    ./wlogout # Logout screen
     ./wofi
   ];
 

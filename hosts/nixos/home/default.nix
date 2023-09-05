@@ -8,5 +8,6 @@
 
   home.packages = with pkgs; [
     rofi # Spotlight
+    discord
   ];
 }

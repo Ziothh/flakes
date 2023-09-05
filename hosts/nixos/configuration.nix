@@ -9,8 +9,7 @@ let
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    [ 
     ];
   
   boot = {
@@ -48,9 +47,11 @@ in
   nix = {
     settings.auto-optimise-store = true;
    
+    # INFO: this is handled in home manager
     # Enable flakes
-    package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
+    # package = pkgs.nixFlakes;
+    # extraOptions = "experimental-features = nix-command flakes";
+
     # gc = {
     #   enable = true;
     #   dates = "weekly";
@@ -184,11 +185,12 @@ in
   # Window manager
   programs.hyprland = {
     enable = true;
-    nvidiaPatches = true;
+    enableNvidiaPatches = true;
 
     xwayland = {
       enable= true;
-      hidpi = true;
+      # ! this might make the screen look pixelated
+      # hidpi = true;
     };
   };
 
@@ -228,7 +230,7 @@ in
   # Personalisation
   fonts = {
     fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       nerdfonts
       font-awesome
       google-fonts
@@ -238,6 +240,7 @@ in
   };
 
   security = {
+    # Disable asking for sudo pwd whenever a `sudo` command is called
     sudo.wheelNeedsPassword = false;
   };
 
