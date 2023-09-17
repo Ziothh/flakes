@@ -3,11 +3,11 @@
 { pkgs, ... }:
 {
   imports = [
+    ./obs-studio
     ./wayland
   ];
 
   home.packages = with pkgs; [
-    rofi # Spotlight
     discord
   ];
 }

@@ -90,24 +90,35 @@ in
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  sound = {
+  # ! Temp disabled because I'm using pipewire
+  # sound = {
+  #   # enable = false; 
+  #   enable = true;
+  #   mediaKeys.enable = true;
+  # };
+  # hardware.pulseaudio = {
+  #   enable = true;
+  #   configFile = pkgs.writeText "default.pa" ''
+  #     load-module module-bluetooth-policy
+  #     load-module module-bluetooth-discover
+  #     load-module module-bluez5-device
+  #     load-module module-bluez5-discover
+  #   '';
+  # };
+  security.rtkit.enable = true;
+  services.pipewire = {
     enable = true;
-    mediaKeys.enable = true;
-  };
-  hardware.pulseaudio = {
-    enable = true;
-    configFile = pkgs.writeText "default.pa" ''
-      load-module module-bluetooth-policy
-      load-module module-bluetooth-discover
-      load-module module-bluez5-device
-      load-module module-bluez5-discover
-    '';
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
   };
 
   # Enable bluetooth
   hardware.bluetooth = {
     enable = true;
-    hsphfpd.enable = true; # HSP & HFP daemon
+    # hsphfpd.enable = true; # HSP & HFP daemon
     settings = {
       General = {
         Enable = "Source,Sink,Media,Socket";

@@ -4,7 +4,10 @@
 
 {
   imports = [
+    ./grim # Screenshot tool
     ./hypr # Wayland compositor
+    ./rofi # Spotlight for wayland
+    ./swappy # Snapshot editor tool
     ./waybar # Interactive bar
     ./swaync
     ./tofi
@@ -13,7 +16,7 @@
   ];
 
   home.packages = with pkgs; [
-    # Is already installed via ~/.config/flakes/configuration.nix
+    # Wayland is already installed via ~/.config/flakes/configuration.nix
   ];
 
   home.file = {
