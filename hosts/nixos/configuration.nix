@@ -7,11 +7,7 @@
 let 
   userName="zioth";
 in
-{
-  imports =
-    [ 
-    ];
-  
+{  
   boot = {
     kernelPackages = pkgs.linuxPackages_latest; # Get latest kernel
  
@@ -105,15 +101,6 @@ in
   #     load-module module-bluez5-discover
   #   '';
   # };
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-  };
 
   # Enable bluetooth
   hardware.bluetooth = {
@@ -263,6 +250,10 @@ in
     packages = with pkgs; [];
   };
 
+
+  imports = [ 
+    ./home/obs-studio/configuration.nix
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
