@@ -13,7 +13,7 @@
       inherit system;
     };
     modules = [
-      ./darwin-config.nix
+      # ./darwin-config.nix
 
       home-manager.darwinModules.home-manager {
         nixpkgs = {
