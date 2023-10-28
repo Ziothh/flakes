@@ -1,13 +1,66 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
+# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 
-{ config, pkgs, ... }:
+{
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  user,
+  ...
+}: {
+  # You can import other NixOS modules here
+  imports = [
+    ../shared/configuration.nix
 
-let 
-  userName="zioth";
-in
-{  
+    # If you want to use modules your own flake exports (from modules/nixos):
+    # outputs.nixosModules.example
+
+    # Or modules from other flakes (such as nixos-hardware):
+    # inputs.hardware.nixosModules.common-cpu-amd
+    # inputs.hardware.nixosModules.common-ssd
+
+    # You can also split up your configuration and import pieces of it here:
+    # ./users.nix
+
+    # Import your generated (nixos-generate-config) hardware configuration
+    ./hardware-configuration.nix
+
+    ./home-manager/obs-studio/configuration.nix
+  ];
+
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      # outputs.overlays.unstable-packages
+
+      # You can also add overlays exported from other flakes:
+      # neovim-nightly-overlay.overlays.default
+
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
+    ];
+    # Configure your nixpkgs instance
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+      allowInsecure = true;
+      # PermittedInsecurePackages = [
+      #   "python-2.7.18.6"
+      # ];
+    };
+  };
+
   boot = {
     kernelPackages = pkgs.linuxPackages_latest; # Get latest kernel
  
@@ -15,6 +68,9 @@ in
 
     # Bootloader.
     loader = {
+      # # TODO: This is just an example, be sure to use whatever bootloader you prefer
+      # systemd-boot.enable = true;
+
       # Dualboot setup
       efi = {
         # canTouchEfiVariables = true;
@@ -40,20 +96,6 @@ in
     channel = "https://nixos.org/channels/nixos-unstable";
   };
 
-  nix = {
-    settings.auto-optimise-store = true;
-   
-    # INFO: this is handled in home manager
-    # Enable flakes
-    # package = pkgs.nixFlakes;
-    # extraOptions = "experimental-features = nix-command flakes";
-
-    # gc = {
-    #   enable = true;
-    #   dates = "weekly";
-    #   options = "--delete-older-than 14d";
-    # };
-  };
 
   networking = {
     hostName = "nixos"; # Define your hostname.
@@ -151,7 +193,15 @@ in
     };
 
     # Enable the OpenSSH daemon.
-    openssh.enable = true;
+    # This setups a SSH server. Very important if you're setting up a headless system.
+    # Feel free to remove if you don't need it.
+    openssh = {
+      enable = true;
+      # Forbid root login through SSH.
+      permitRootLogin = "no";
+      # Use keys only. Remove if you want to SSH using password (not recommended)
+      passwordAuthentication = false;
+    };
 
     # Enable automatic login for the user.
     getty.autologinUser = "zioth";
@@ -161,15 +211,6 @@ in
   hardware = {
     opengl.enable = true;
     nvidia.modesetting.enable = true;
-  };
-
-  # Allow unfree packages
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowInsecure = true;
-    # PermittedInsecurePackages = [
-    #   "python-2.7.18.6"
-    # ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -242,18 +283,18 @@ in
     sudo.wheelNeedsPassword = false;
   };
 
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${userName} = {
+  users.users.${user} = {
+    # initialPassword = "correcthorsebatterystaple";
     isNormalUser = true;
     description = "zioth";
+    openssh.authorizedKeys.keys = [
+      # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
+    ];
     extraGroups = [ "networkmanager" "wheel" "video" "audio" "lp" "sound" "pulse" ];
-    packages = with pkgs; [];
+    packages = [];
   };
-
-
-  imports = [ 
-    ./home/obs-studio/configuration.nix
-  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -261,5 +302,6 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05"; # Did you read the comment?
 }

@@ -1,24 +1,51 @@
-{ config, pkgs, ... }:
+{ inputs, outputs, user, ... }:
 
 let 
-  user = "zioth";
+  pkgs = inputs.nixpkgs;
 in
 {
   imports = [
     ./packages
   ];
 
-  nix = pkgs.lib.mkForce {
-    package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+  # nix = pkgs.lib.mkForce {
+  #   # package = pkgs.nix;
+  #   settings.experimental-features = [ "nix-command" "flakes" ];
+  # };
+
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      # outputs.overlays.unstable-packages
+
+      # You can also add overlays exported from other flakes:
+      # neovim-nightly-overlay.overlays.default
+
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
+    ];
+    # Configure your nixpkgs instance
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = _: true;
+    };
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
+  programs.git.enable = true;
+
+  # Home Manager needs a bit of information about you and the paths it should manage.
   home.username = "${user}";
-  home.homeDirectory = "/home/${user}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

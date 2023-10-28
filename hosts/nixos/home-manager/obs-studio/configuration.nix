@@ -1,6 +1,5 @@
 # This file needs to be imported into the main configuration.nix
 {
-
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

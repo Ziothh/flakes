@@ -26,7 +26,7 @@
 
     ## Base terminal CLI
     htop # resource monitor
-    exa # ls replacement
+    eza # ls replacement
     xclip # Clipboard management for my pbcopy and pbpaste aliasses 
     fzf
     skim # Select

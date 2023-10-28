@@ -1,32 +1,32 @@
 # nixosConfigurations = { /* contents of this file */ }
 
-{ lib, nixpkgs, home-manager, user, ... }:
-{        # nixos is the username
+{ inputs, outputs, user, ... }:
+let 
+  nixpkgs = inputs.nixpkgs;
+  home-manager = inputs.home-manager;
+  lib = nixpkgs.lib;
+in
+{      
+  # # FIXME replace with your hostname
+  # your-hostname = nixpkgs.lib.nixosSystem {
+  #   specialArgs = {inherit inputs outputs;};
+  #   modules = [
+  #     # > Our main nixos configuration file <
+  #     ./nixos/configuration.nix
+  #   ];
+  # };
+
+  # Hostname
   nixos = lib.nixosSystem {
-    system = "x86_64-linux";
+    # system = "x86_64-linux";
+    specialArgs = { inherit inputs outputs user; };
     modules = [ 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # NixOS configuration
       ./configuration.nix 
-
-      home-manager.nixosModules.home-manager {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user; };
-        home-manager.users.${user} = {
-          imports = [ 
-            (../../home-manager/home.nix)
-          ] ++ [
-            (./home)
-          ];
-          # imports = [ 
-          #   (/home/${user}/.config/home-manager/home.nix)
-          # ] ++ [
-          #   (./home)
-          # ];
-        };
-      }
+      # Home Manager configuration
+      ./home-manager
     ];
   };
 }
