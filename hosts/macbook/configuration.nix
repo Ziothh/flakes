@@ -33,6 +33,8 @@
       # Disable if you don't want unfree packages
       allowUnfree = true;
       allowInsecure = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = _: true;
       # PermittedInsecurePackages = [
       #   "python-2.7.18.6"
       # ];
