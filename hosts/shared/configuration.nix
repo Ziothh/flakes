@@ -101,7 +101,6 @@
       font-awesome
       google-fonts
       source-code-pro
-      corefonts
     ];
   };
 }
