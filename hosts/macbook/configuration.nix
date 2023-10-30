@@ -21,8 +21,8 @@
 
     NSGlobalDomain = {
       AppleShowAllExtensions = true;
-      InitialKeyRepeat = 14;
-      KeyRepeat = 1;
+      InitialKeyRepeat = 100; # Default 650ms
+      KeyRepeat = 25;
     };
   };
 
