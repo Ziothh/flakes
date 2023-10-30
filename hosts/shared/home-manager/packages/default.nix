@@ -57,7 +57,6 @@
     vscode
 
     ## Plebian
-    firefox-devedition-unwrapped
     discord
     obsidian
 

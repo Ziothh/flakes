@@ -11,6 +11,10 @@ in
   ];
 
   home-manager.users.${user} = {
+    home.packages = with pkgs; [ 
+      firefox-devedition-unwrapped
+    ];
+
     imports = [ 
       ../../shared/home-manager/user.nix
 
@@ -19,7 +23,6 @@ in
     ];
 
     home.homeDirectory = "/home/${user}";
-    # home.packages = with pkgs; [ ];
 
     # imports = [ 
     #   (../../home-manager/home.nix)
