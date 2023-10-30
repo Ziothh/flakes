@@ -8,7 +8,6 @@
   nixpkgs = {
     config = { 
       allowUnfree = true; 
-      allowUnfreePredicate = pkg: true;
     };
   };
 }
