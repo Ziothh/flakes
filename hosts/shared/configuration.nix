@@ -48,20 +48,6 @@
       neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       git
       wget
-
-      # shit to get rust working
-      glib
-      glibc
-      gcc
-      pkg-config
-      clang
-      llvmPackages_16.bintools
-      llvmPackages_16.stdenv
-      libiconv
-      openssl
-      openssl.dev
-      # pkgs.openssl # E.g. used in prisma & some other rust packages
-      perl
     ];
     variables = {
       TERMINAL = "alacritty";

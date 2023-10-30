@@ -235,8 +235,21 @@
   };
 
 
-  # environment.systemPackages = with pkgs; [
-  # ];
+  environment.systemPackages = with pkgs; [
+    # shit to get rust working
+    glib
+    glibc
+    gcc
+    pkg-config
+    clang
+    llvmPackages_16.bintools
+    llvmPackages_16.stdenv
+    libiconv
+    openssl
+    openssl.dev
+    # pkgs.openssl # E.g. used in prisma & some other rust packages
+    perl
+  ];
 
   security = {
     # Disable asking for sudo pwd whenever a `sudo` command is called
