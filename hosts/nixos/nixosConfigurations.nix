@@ -2,9 +2,8 @@
 
 { inputs, outputs, user, ... }:
 let 
-  nixpkgs = inputs.nixpkgs;
   home-manager = inputs.home-manager;
-  lib = nixpkgs.lib;
+  lib = inputs.nixpkgs.lib;
 in
 {      
   # # FIXME replace with your hostname
@@ -19,7 +18,7 @@ in
   # Hostname
   nixos = lib.nixosSystem {
     # system = "x86_64-linux";
-    specialArgs = { inherit inputs outputs user; };
+    specialArgs = { inherit inputs outputs user lib; };
     modules = [ 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix

@@ -29,7 +29,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
 
-    ./home-manager/obs-studio/configuration.nix
+    ./home-manager/configuration.nix
   ];
 
   nixpkgs = {
@@ -122,8 +122,6 @@
     # useXkbConfig = true; # Use xkbOptions in tty 
   };
 
-  # Set your time zone.
-  time.timeZone = "Europe/Brussels";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -197,10 +195,13 @@
     # Feel free to remove if you don't need it.
     openssh = {
       enable = true;
-      # Forbid root login through SSH.
-      permitRootLogin = "no";
-      # Use keys only. Remove if you want to SSH using password (not recommended)
-      passwordAuthentication = false;
+
+      settings = {
+        # Forbid root login through SSH.
+        PermitRootLogin = "no";
+        # Use keys only. Remove if you want to SSH using password (not recommended)
+        PasswordAuthentication = false;
+      };
     };
 
     # Enable automatic login for the user.
@@ -234,49 +235,8 @@
   };
 
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    git
-    wget
-
-    # shit to get rust working
-    glib
-    glibc
-    gcc
-    pkg-config
-    clang
-    llvmPackages_16.bintools
-    llvmPackages_16.stdenv
-    libiconv
-    openssl
-    openssl.dev
-    # pkgs.openssl # E.g. used in prisma & some other rust packages
-    perl
-  ];
-
-  # Shell config
-  programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
-  environment.shells = with pkgs; [ zsh ];
-  environment.variables = {
-    TERMINAL = "alacritty";
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-  };
-
-  # Personalisation
-  fonts = {
-    fontDir.enable = true;
-    packages = with pkgs; [
-      nerdfonts
-      font-awesome
-      google-fonts
-      source-code-pro
-      corefonts
-    ];
-  };
+  # environment.systemPackages = with pkgs; [
+  # ];
 
   security = {
     # Disable asking for sudo pwd whenever a `sudo` command is called

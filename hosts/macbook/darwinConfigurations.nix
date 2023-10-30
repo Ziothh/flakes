@@ -1,15 +1,22 @@
 # darwinConfigurations = { /* contents of this file */ }
 
-{ nixpkgs, darwin, home-manager, ... }:
+{ inputs, outputs, user, ... }:
+  let 
+    darwin = inputs.darwin;
+    home-manager = inputs.home-manager;
+    pkgs = inputs.nixpkgs;
+    lib = pkgs.lib;
+  in 
 {
   # Rosseel MacBook Pro 16
   "Louis-MacBook" = let 
     system = "x86_64-darwin";
-    user = "zioth";
   in darwin.lib.darwinSystem {
+    specialArgs = { inherit inputs outputs user lib; };
+
     inherit system;
     # system = "${system}";
-    pkgs = import nixpkgs {
+    pkgs = import pkgs {
       inherit system;
     };
     modules = [
@@ -26,7 +33,7 @@
 
           users = {
             "${user}" = {
-              home.homeDirectory = nixpkgs.lib.mkForce "/Users/${user}";
+              home.homeDirectory = pkgs.lib.mkForce "/Users/${user}";
               imports = [
                 ({ pkgs, ... }: {
                   home.stateVersion = "23.05";
@@ -35,31 +42,31 @@
                   # ];
 
                   home.sessionVariables = {
-                    EDITOR = "nvim";
+                    # EDITOR = "nvim";
                     CLICOLOR = 1;
                     # PAGER = "less"; # idk maybe use bat
                   };
 
-                  programs.bat = {
-                    enable = true;
-                    config.theme = "TwoDark";
-                  };
-
-                  programs.fzf = {
-                    enable = true;
-                    enableZshIntegration = true;
-                  };
-
-                  programs.exa.enable = true;
-                  programs.zsh = {
-                    enable = true;
-                    enableCompletion = true;
-                    enableAutosuggestions = true;
-                    enableSyntaxHighlighting = true;
-                    shellAliases = {
-                      ls = "ls --color=auto -F";
-                    };
-                  };
+                  # programs.bat = {
+                  #   enable = true;
+                  #   config.theme = "TwoDark";
+                  # };
+                  #
+                  # programs.fzf = {
+                  #   enable = true;
+                  #   enableZshIntegration = true;
+                  # };
+                  #
+                  # programs.exa.enable = true;
+                  # programs.zsh = {
+                  #   enable = true;
+                  #   enableCompletion = true;
+                  #   enableAutosuggestions = true;
+                  #   enableSyntaxHighlighting = true;
+                  #   shellAliases = {
+                  #     ls = "ls --color=auto -F";
+                  #   };
+                  # };
                 })
               ];
             };

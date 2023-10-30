@@ -1,4 +1,12 @@
-{ pkgs, ... }: {
+{ inputs, outputs, user, ... }: 
+  let
+    pkgs = inputs.nixpkgs;
+  in 
+{
+  imports = [
+    ../shared/configuration.nix
+  ];
+
   services.nix-daemon.enable = true;
 
   system.stateVersion = 4;
@@ -19,27 +27,9 @@
   };
 
 
-  programs.zsh.enable = true;
-  environment = with pkgs; {
-    shells = [ bash zsh ];
-    loginShell = [ zsh ];
-    systemPackages = [ coreutils ];
-  };
-
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-
 
   # system.keyboard = {
   #   enableKeyMapping = true;
   #   remapCapsLockToEscape = true;
   # };
-
-  fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [ 
-      (nerdfonts.override { fonts = ["Meslo" "FiraCode" "FiraMono" ]; })
-    ];
-  };
 }

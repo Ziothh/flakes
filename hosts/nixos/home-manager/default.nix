@@ -10,7 +10,6 @@ in
     ../../shared/home-manager/homeConfiguration.nix
   ];
 
-
   home-manager.users.${user} = {
     imports = [ 
       ../../shared/home-manager/user.nix

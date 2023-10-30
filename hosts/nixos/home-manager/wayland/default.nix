@@ -5,7 +5,7 @@
 {
   imports = [
     ./grim # Screenshot tool
-    ./hypr # Wayland compositor
+    ./hyprland # Wayland compositor
     ./rofi # Spotlight for wayland
     ./swappy # Snapshot editor tool
     ./waybar # Interactive bar

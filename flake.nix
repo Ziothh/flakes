@@ -70,6 +70,7 @@
     homeManagerModules = import ./modules/home-manager;
 
 
+    # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = import ./hosts/nixos/nixosConfigurations.nix { inherit inputs outputs user; };
     darwinConfigurations = import ./hosts/macbook/darwinConfigurations.nix { inherit inputs outputs user; };
 
