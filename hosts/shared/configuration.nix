@@ -40,7 +40,6 @@
   # [System config]
   # Shell config
   programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
   environment = with pkgs; {
     shells = [ bash zsh ];
     # loginShell = [ zsh ];

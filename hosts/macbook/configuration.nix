@@ -27,6 +27,10 @@
   };
 
 
+  users.users."${user}" = {
+    shell = inputs.nixpkgs.zsh;
+  };
+
 
   # system.keyboard = {
   #   enableKeyMapping = true;
