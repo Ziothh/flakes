@@ -20,6 +20,7 @@
       inherit system;
     };
     modules = [
+      ./configuration.nix
       # ./darwin-config.nix
 
       home-manager.darwinModules.home-manager {
@@ -35,6 +36,7 @@
             "${user}" = {
               home.homeDirectory = pkgs.lib.mkForce "/Users/${user}";
               imports = [
+                ./home-manager
                 ({ pkgs, ... }: {
                   home.stateVersion = "23.05";
                   # home.packages = with pkgs; [
