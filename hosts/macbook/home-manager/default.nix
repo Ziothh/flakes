@@ -13,8 +13,6 @@
     ];
 
     # home.sessionVariables = {
-      # EDITOR = "nvim";
-      # PAGER = "less"; # idk maybe use bat
     # };
 
     imports = [
