@@ -1,9 +1,6 @@
 # Home manager config for NixOS
 
-{ inputs, outputs, user, ... }:
-let 
-  pkgs = inputs.nixpkgs;
-in
+{ inputs, outputs, user, pkgs, ... }:
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager

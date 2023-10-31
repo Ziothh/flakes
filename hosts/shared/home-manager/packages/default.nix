@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
   imports = [
+    # Terminal config
+    ./zsh
+
     # Terminal emulators
     ./alacritty
     ./kitty

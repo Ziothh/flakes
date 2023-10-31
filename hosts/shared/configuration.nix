@@ -3,6 +3,11 @@
   #   # pkgs = inputs.nixpkgs;
   # in
 {
+  imports = [
+    ./home-manager/packages/zsh/configuration.nix
+  ];
+
+
   # [Nix]
   nix = {
     # This will add each flake input as a registry
@@ -70,23 +75,12 @@
 
 
   # [System config]
-  # Shell config
-  programs.zsh.enable = true;
-  environment = with pkgs; {
-    shells = [ bash zsh ];
-    # loginShell = [ zsh ];
-    systemPackages = [ 
-      coreutils # GNU core utilities
-      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      git
-      wget
-    ];
-    variables = {
-      TERMINAL = "alacritty";
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-    };
-  };
+  environment.systemPackages  = with pkgs; [ 
+    coreutils # GNU core utilities
+    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    git
+    wget
+  ];
 
   # [System settings]
   # Set your time zone.

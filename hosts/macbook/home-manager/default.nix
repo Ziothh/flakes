@@ -12,11 +12,10 @@
       sequelpro
     ];
 
-    home.sessionVariables = {
+    # home.sessionVariables = {
       # EDITOR = "nvim";
-      CLICOLOR = 1;
       # PAGER = "less"; # idk maybe use bat
-    };
+    # };
 
     imports = [
       ../../shared/home-manager/user.nix

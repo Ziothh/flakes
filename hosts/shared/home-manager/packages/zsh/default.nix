@@ -16,7 +16,7 @@
       recursive = false;
     };
     ".config/zsh" = {
-      source = ../zsh;
+      source = ./config;
       recursive = true;
     };
   };
