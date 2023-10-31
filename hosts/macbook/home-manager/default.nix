@@ -1,4 +1,4 @@
-# Home manager config for NixOS
+# Home manager config for MacOS
 
 { inputs, user, pkgs, ... }:
 {
