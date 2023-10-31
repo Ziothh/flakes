@@ -6,7 +6,7 @@
   ];
 
   home.packages = with pkgs; [
-    # Is already installed via ~/.config/flakes/configuration.nix
+    # Is already installed via ../configuration.nix
   ];
 
   home.file = {
