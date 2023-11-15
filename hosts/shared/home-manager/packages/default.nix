@@ -58,6 +58,7 @@
 
     ## Development
     vscode
+    # postman # TODO: check if this builds later
 
     ## Plebian
     discord
