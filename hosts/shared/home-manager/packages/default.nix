@@ -49,6 +49,7 @@
 
     # [Dev]
     nodejs_20
+    nodejs_20.pkgs.pnpm
     # nodePackages_latest.pnpm
 
     rustup
