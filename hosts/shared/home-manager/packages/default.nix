@@ -58,11 +58,12 @@
 
     ## Development
     vscode
-    # postman # TODO: check if this builds later
+    # postman # TODO: maybe use bruno instead?
 
     ## Plebian
     discord
     obsidian
+    # appflowy # Open source alternative to notion
 
 
     # # Adds the 'hello' command to your environment. It prints a friendly
