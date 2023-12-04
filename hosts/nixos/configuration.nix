@@ -207,6 +207,13 @@
     # Enable automatic login for the user.
     getty.autologinUser = "zioth";
 
+    # User group for device management
+    udev = {
+      enable = true;
+      extraRules = ''
+      # Your rule goes here
+      '';
+    };
   };
 
   hardware = {
@@ -270,7 +277,17 @@
     openssh.authorizedKeys.keys = [
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" "lp" "sound" "pulse" ];
+    extraGroups = [ 
+    # [ Linux ]
+    "wheel" # Is sudo user
+    "plugdev" # Non-sudo access to `/dev`
+    "video" "audio" "sound" 
+    # [ Applications ]
+    "networkmanager" 
+    "lp"
+    # [ IDK ]
+    "pulse" 
+    ];
     packages = [];
   };
 
