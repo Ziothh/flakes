@@ -212,6 +212,14 @@
       enable = true;
       extraRules = ''
       # Your rule goes here
+
+      # [ Boards ]
+      # # STM32F3DISCOVERY rev A/B - ST-LINK/V2
+      # ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", TAG+="uaccess"
+      # # STM32F3DISCOVERY rev C+ - ST-LINK/V2-1
+      # ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", TAG+="uaccess"
+      # Raspberry Pi Debug Probe (CMSIS-DAP)
+      ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="000c", TAG+="uaccess"
       '';
     };
   };
