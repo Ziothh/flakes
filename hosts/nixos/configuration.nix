@@ -107,6 +107,22 @@
     # Enable networking
     networkmanager.enable = true;
 
+    # Does not need to be enabled because I'm using networkmanager (CLI: `nm`, TUI: `nmtui`)
+    # [Docs](https://nixos.org/manual/nixos/stable/#sec-wireless)
+    # wireless = {
+    #     enable = true;
+    #     networks = {
+    #         "Hogeweg 13 - verdiep 2" = {
+    #             psk = "Heyvaerts25115!";
+    #         };
+    #     };
+    # };
+
+
+    # Disables the renaming of network devices (e.g. eth0 => ens3)
+    # Currently disabled so that I can easilly reason about network devices by their name
+    usePredictableInterfaceNames = false;
+
 
     # Open ports in the firewall.
     # firewall.allowedTCPPorts = [ ... ];
