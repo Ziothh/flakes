@@ -310,7 +310,7 @@
     "networkmanager" 
     "lp"
     # [ IDK ]
-    "pulse" 
+    "pulse" # pulseaudio
     ];
     packages = [];
   };
