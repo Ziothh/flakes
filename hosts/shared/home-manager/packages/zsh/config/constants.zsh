@@ -5,14 +5,18 @@
 # TODO: Maybe look into making these nix home.systemVariables
 
 # [General config]
-export TERMINAL="alacritty"
-export EDITOR="nvim"
-export VISUAL="nvim"
-export CLICOLOR=1
-export MANPAGER="sh -c 'col -bx | bat -l man -p'" # Set `bat` as the colorizing pager for man
+export TERMINAL="alacritty";
+export TERM="alacritty";
+export EDITOR="nvim";
+export VISUAL="nvim";
+export CLICOLOR=1;
+
+# Set `bat` as the colorizing page for man
+export MANPAGER="sh -c 'col -bx | bat -l man -p'";
+export MANROFFOPT="-c"; # Fixes weird formatting for man with bat ('22m' characters being added where colors are set)
 
 # [Path]
-export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
+export PATH="$PATH:$HOME/.local/share/nvim/mason/bin";
 
 # [Specifics]
-export CARGO_REGISTRIES_CRATES_IO_PROTOCOL="sparse"
+export CARGO_REGISTRIES_CRATES_IO_PROTOCOL="sparse";
