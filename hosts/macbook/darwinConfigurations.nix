@@ -8,9 +8,10 @@
     lib = pkgs.lib;
   in 
 {
-  # Rosseel MacBook Pro 16
+  # Funkey Macbook Air M2
   "Louis-MacBook" = let 
-    system = "x86_64-darwin";
+    system = "aarch64-darwin";
+    # system = "x86_64-darwin"; # TODO: MAKE THIS A FOR LOOP
   in darwin.lib.darwinSystem {
     specialArgs = { inherit inputs outputs user lib; };
 
@@ -18,6 +19,7 @@
     # system = "${system}";
     pkgs = import pkgs {
       inherit system;
+      config.allowUnfree = true;
     };
     modules = [
       ./configuration.nix

@@ -6,7 +6,6 @@
 
     # Terminal emulators
     ./alacritty
-    ./kitty
 
     # TUIs
     ./bat
@@ -63,7 +62,6 @@
 
     ## Plebian
     discord
-    obsidian
     # appflowy # Open source alternative to notion
 
 

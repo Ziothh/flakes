@@ -9,8 +9,8 @@
 
   home-manager.users."${user}" = {
     home.packages = with pkgs; [
-      sequelpro
-      raycast # Spotlight replacement
+      # sequelpro
+      # raycast # Spotlight replacement
     ];
 
     # home.sessionVariables = {
