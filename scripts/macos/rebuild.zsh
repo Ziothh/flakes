@@ -1,1 +1,1 @@
-darwin-rebuild switch --flake ~/.config/flakes
+darwin-rebuild switch --flake ~/.config/flakes#macbook

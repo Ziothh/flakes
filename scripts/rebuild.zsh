@@ -4,7 +4,7 @@ source ~/.config/flakes/scripts/prelude.zsh
 echo "Switching nixos to use the latest config..."
 echo ""
 # sudo nixos-rebuild switch --impure --flake .# --show-trace 
-sudo nixos-rebuild switch --impure --flake .#
+sudo nixos-rebuild switch --impure --flake .#nixos
 
 # .#<host> defaults to current host
 # --impure allows abosolute paths

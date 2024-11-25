@@ -9,7 +9,7 @@
   in 
 {
   # Funkey Macbook Air M2
-  "Louis-MacBook" = let 
+  "macbook" = let 
     system = "aarch64-darwin";
     # system = "x86_64-darwin"; # TODO: MAKE THIS A FOR LOOP
   in darwin.lib.darwinSystem {
