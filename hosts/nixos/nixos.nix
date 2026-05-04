@@ -20,12 +20,7 @@ in
     # system = "x86_64-linux";
     specialArgs = { inherit inputs outputs user lib; };
     modules = [
-      # Include the results of the hardware scan.
-      ./hardware.nix
-      # NixOS configuration
       ./system.nix
-      # Home Manager configuration
-      ./home-manager
     ];
   };
 }

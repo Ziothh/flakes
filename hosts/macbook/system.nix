@@ -2,6 +2,7 @@
 {
   imports = [
     ../shared/system.nix
+    inputs.home-manager.darwinModules.home-manager
   ];
 
   system.stateVersion = 4;
@@ -22,26 +23,13 @@
     };
   };
 
-  # system.activationScripts.applications.text = pkgs.lib.mkForce (let 
-  #   appDir = "~/Applications/Nix\ Apps";
-  # in ''
-  #   echo "Symlinking apps to ${appDir}"
-  #   rm -rf ${appDir}
-  #   mkdir -p ${appDir} || echo "ERROR: could not create folder to symlink apps"
-  #   for app in $(find ${config.system.build.applications}/Applications -maxdepth 1 -type l); do
-  #     src="$(/usr/bin/stat -f%Y "$app")"
-  #     echo "> Linking $app $src"
-  #     cp -r "$src" ${appDir}
-  #   done
-  # '');
+  users.users."${user}".shell = pkgs.zsh;
 
-  users.users."${user}" = {
-    shell = pkgs.zsh;
+  # Home Manager <-> nix-darwin integration
+  home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { inherit inputs outputs user; };
+  home-manager.users."${user}" = {
+    imports = [ ../shared/home.nix ];
+    home.homeDirectory = pkgs.lib.mkForce "/Users/${user}";
   };
-
-
-  # system.keyboard = {
-  #   enableKeyMapping = true;
-  #   remapCapsLockToEscape = true;
-  # };
 }

@@ -23,8 +23,6 @@
     };
     modules = [
       ./system.nix
-
-      ./home-manager
     ];
   };
 }

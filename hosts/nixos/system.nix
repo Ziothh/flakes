@@ -15,15 +15,16 @@
   # You can import other NixOS modules here
   imports = [
     ../shared/system.nix
+    inputs.home-manager.nixosModules.home-manager
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
 
-    # Import your generated (nixos-generate-config) hardware configuration
     ./hardware.nix
 
-    ./home-manager/configuration.nix
+    # System-level config for HM features that need it
+    ./home-manager/obs-studio/configuration.nix
+    ./home-manager/wayland/configuration.nix
   ];
 
   nixpkgs = {
@@ -316,4 +317,19 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05"; # Did you read the comment?
+
+  # Home Manager <-> NixOS integration
+  home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { inherit inputs outputs user; };
+  home-manager.users.${user} = {
+    imports = [
+      ../shared/home.nix
+      ./home-manager/obs-studio
+      ./home-manager/wayland
+    ];
+    home.packages = with pkgs; [
+      firefox-devedition-unwrapped
+    ];
+    home.homeDirectory = "/home/${user}";
+  };
 }
