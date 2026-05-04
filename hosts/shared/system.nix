@@ -4,7 +4,7 @@
   # in
 {
   imports = [
-    ./home-manager/packages/zsh/configuration.nix
+    ./features/zsh/system.nix
   ];
 
 

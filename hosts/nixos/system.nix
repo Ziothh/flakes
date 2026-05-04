@@ -23,8 +23,8 @@
     ./hardware.nix
 
     # System-level config for HM features that need it
-    ./home-manager/obs-studio/configuration.nix
-    ./home-manager/wayland/configuration.nix
+    ./features/obs-studio/system.nix
+    ./features/wayland/system.nix
   ];
 
   nixpkgs = {
@@ -324,8 +324,8 @@
   home-manager.users.${user} = {
     imports = [
       ../shared/home.nix
-      ./home-manager/obs-studio
-      ./home-manager/wayland
+      ./features/obs-studio/user.nix
+      ./features/wayland/user.nix
     ];
     home.packages = with pkgs; [
       firefox-devedition-unwrapped
