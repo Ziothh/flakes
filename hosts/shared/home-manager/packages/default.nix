@@ -15,7 +15,7 @@
     ./zellij
 
     # Terminal styling
-    ./neofetch
+    ./fastfetch
     ./starship
   ];
 
@@ -44,12 +44,10 @@
       tree-sitter
 
     spotify
-      spotify-tui
 
     # [Dev]
-    nodejs_20
-    nodejs_20.pkgs.pnpm
-    # nodePackages_latest.pnpm
+    nodejs_24
+    pnpm_10
 
     rustup
       

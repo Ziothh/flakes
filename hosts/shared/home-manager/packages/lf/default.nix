@@ -1,11 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.packages = with pkgs; [
     lf # File manager
-      ueberzug # Image viewing in termnial
-      # TODO: replace with xdragon
-      # dragon-drop # Drag and drop functionality 
+  ] ++ lib.optionals stdenv.isLinux [
+    ueberzug # Image viewing in terminal — Linux/X11 only
   ];
 
   home.file = {

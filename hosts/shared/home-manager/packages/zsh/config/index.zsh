@@ -3,7 +3,7 @@
 if [[ -n $ALACRITTY_WINDOW_ID ]] || [[ -n $SSH_TTY ]]; then
   __setupMyShell() {
     echo ""
-    neofetch
+    fastfetch
 
     source ~/.config/zsh/config.zsh
     source ~/.config/zsh/constants.zsh

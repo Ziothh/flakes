@@ -88,10 +88,10 @@
 
   # [Personisation]
   fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [ 
-      (nerdfonts.override { fonts = ["Meslo" "FiraCode" "FiraMono" ]; })
-      # nerdfonts
+    packages = with pkgs; [
+      nerd-fonts.meslo-lg
+      nerd-fonts.fira-code
+      nerd-fonts.fira-mono
       font-awesome
       google-fonts
       source-code-pro

@@ -1,15 +1,11 @@
-{ inputs, config, outputs, user, ... }: 
-  let
-    pkgs = inputs.nixpkgs;
-  in 
+{ inputs, config, outputs, user, pkgs, ... }:
 {
   imports = [
     ../shared/configuration.nix
   ];
 
-  services.nix-daemon.enable = true;
-
   system.stateVersion = 4;
+  system.primaryUser = "${user}";
 
   system.defaults = {
     dock.autohide = true;
@@ -40,7 +36,7 @@
   # '');
 
   users.users."${user}" = {
-    shell = inputs.nixpkgs.zsh;
+    shell = pkgs.zsh;
   };
 
 

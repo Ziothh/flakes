@@ -290,6 +290,7 @@
   fonts.packages = with pkgs; [
       corefonts
   ];
+  fonts.fontDir.enable = true;
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
