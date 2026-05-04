@@ -5,7 +5,7 @@ echo "Updating flake lockfile..."
 echo ""
 nix flake update
 
-source ~/.config/flakes/scripts/rebuild.zsh
+source ~/.config/flakes/scripts/nixos/rebuild.zsh
 
 echo ""
 echo "Done!"
