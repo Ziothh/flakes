@@ -1,7 +1,7 @@
 { inputs, config, outputs, user, pkgs, ... }:
 {
   imports = [
-    ../shared/configuration.nix
+    ../shared/system.nix
   ];
 
   system.stateVersion = 4;

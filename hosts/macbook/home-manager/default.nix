@@ -17,7 +17,7 @@
     # };
 
     imports = [
-      ../../shared/home-manager/user.nix
+      ../../shared/home.nix
     ];
 
     # programs.bat = {

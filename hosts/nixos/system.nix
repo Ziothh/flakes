@@ -14,20 +14,14 @@
 }: {
   # You can import other NixOS modules here
   imports = [
-    ../shared/configuration.nix
-
-    # If you want to use modules your own flake exports (from modules/nixos):
-    # outputs.nixosModules.example
+    ../shared/system.nix
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
-
     # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
+    ./hardware.nix
 
     ./home-manager/configuration.nix
   ];

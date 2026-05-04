@@ -62,8 +62,8 @@
 
 
     # Available through 'nixos-rebuild --flake .#your-hostname'
-    nixosConfigurations = import ./hosts/nixos/nixosConfigurations.nix { inherit inputs outputs user; };
-    darwinConfigurations = import ./hosts/macbook/darwinConfigurations.nix { inherit inputs outputs user; };
+    nixosConfigurations = import ./hosts/nixos/nixos.nix { inherit inputs outputs user; };
+    darwinConfigurations = import ./hosts/macbook/darwin.nix { inherit inputs outputs user; };
 
     # # NixOS configuration entrypoint
     # # Available through 'nixos-rebuild --flake .#your-hostname'

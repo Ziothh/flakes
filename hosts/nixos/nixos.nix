@@ -19,11 +19,11 @@ in
   nixos = lib.nixosSystem {
     # system = "x86_64-linux";
     specialArgs = { inherit inputs outputs user lib; };
-    modules = [ 
+    modules = [
       # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ./hardware.nix
       # NixOS configuration
-      ./configuration.nix 
+      ./system.nix
       # Home Manager configuration
       ./home-manager
     ];

@@ -1,4 +1,4 @@
-# darwinConfigurations = { /* contents of this file */ }
+# darwinConfigurations.macbook = { /* contents of this file */ }
 
 { inputs, outputs, user, ... }:
   let 
@@ -22,7 +22,7 @@
       config.allowUnfree = true;
     };
     modules = [
-      ./configuration.nix
+      ./system.nix
 
       ./home-manager
     ];

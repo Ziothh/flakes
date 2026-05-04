@@ -5,7 +5,7 @@ let
 in
 {
   imports = [
-    ./packages
+    ./home-manager/packages
   ];
 
   # nix = pkgs.lib.mkForce {

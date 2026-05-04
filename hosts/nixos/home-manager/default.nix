@@ -12,8 +12,8 @@
       firefox-devedition-unwrapped
     ];
 
-    imports = [ 
-      ../../shared/home-manager/user.nix
+    imports = [
+      ../../shared/home.nix
 
       ./obs-studio
       ./wayland
