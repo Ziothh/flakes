@@ -1,15 +1,9 @@
-# Cool graphic on terminal open
+# Cool prompt on terminal open
 
-{ pkgs, ... }:
+{ ... }:
 {
-  home.packages = with pkgs; [
-    starship 
-  ];
-
-  home.file = {
-    ".config/starship.toml" = {
-      source = ./starship.toml;
-      recursive = false;
-    };
+  programs.starship = {
+    enable = true;
+    settings = builtins.fromTOML (builtins.readFile ./starship.toml);
   };
 }

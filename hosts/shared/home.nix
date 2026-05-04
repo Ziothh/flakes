@@ -5,7 +5,6 @@
     ./features/alacritty/user.nix
     ./features/bat/user.nix
     ./features/btop/user.nix
-    ./features/fastfetch/user.nix
     ./features/lf/user.nix
     ./features/ranger/user.nix
     ./features/starship/user.nix
@@ -21,9 +20,9 @@
     fzf
     skim          # selector
     ripgrep
-    starship      # terminal prompt
     direnv        # directory-based environments
     gh            # GitHub CLI
+    fastfetch     # cool graphic on terminal open
 
     # Editor
     neovim
