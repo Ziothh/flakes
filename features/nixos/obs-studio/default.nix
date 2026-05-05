@@ -1,18 +1,6 @@
 {
-  system = { ... }: {
-    security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-    environment.variables.QT_QPA_PLATFORM = "wayland";
-  };
+  features = [ ../audio ];   # OBS uses the system audio stack (pipewire)
   user = { pkgs, ... }: {
-    home.packages = with pkgs; [
-      pipewire     # video input source
-      obs-studio   # screen recording
-    ];
+    home.packages = with pkgs; [ obs-studio ];
   };
 }
