@@ -1,0 +1,11 @@
+{
+  user = { pkgs, ... }: {
+    home.packages = with pkgs; [ ranger ];
+    home.file = {
+      ".config/ranger/rc.conf".source     = ./rc.conf;
+      ".config/ranger/rifle.conf".source  = ./rifle.conf;
+      ".config/ranger/scope.sh".source    = ./scope.sh;
+      ".config/ranger/commands.py".source = ./commands.py;
+    };
+  };
+}
