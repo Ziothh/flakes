@@ -25,6 +25,12 @@
 #   mkNixOSSystem  / mkDarwinSystem
 #     Build a full nixosSystem / darwinSystem call from a host file +
 #     surrounding environment (nixpkgs, user, etc.). flake.nix calls these.
+#
+# The mk* helpers automatically wire the HM<->system integration:
+#   - home-manager.useUserPackages = true
+#   - home-manager.extraSpecialArgs = specialArgs ++ { user; }
+#   - home-manager.users.<user>.imports = collected user modules
+# so individual hosts only declare their own bare config in `module`.
 
 { lib }:
 
@@ -48,7 +54,7 @@ let
       featurePaths;
 
   # Assemble the module list passed to nixosSystem/darwinSystem.
-  buildHostModules = { user, hostFile }:
+  buildHostModules = { user, hostFile, hmExtraSpecialArgs }:
     let
       collected = collectFeatures hostFile.features;
     in
@@ -56,6 +62,8 @@ let
       ++ collected.systemModules
       ++ [
         ({ ... }: {
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = hmExtraSpecialArgs;
           home-manager.users.${user}.imports = collected.userModules;
         })
       ];
@@ -69,10 +77,17 @@ in {
     , nixpkgs
     , specialArgs ? { }
     }:
-    nixpkgs.lib.nixosSystem {
+    let
+      sa = specialArgs // { inherit user; };
+    in nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = specialArgs // { inherit user; };
-      modules = buildHostModules { inherit user hostFile; };
+      specialArgs = sa;
+      modules =
+        [ specialArgs.inputs.home-manager.nixosModules.home-manager ]
+        ++ buildHostModules {
+          inherit user hostFile;
+          hmExtraSpecialArgs = sa;
+        };
     };
 
   mkDarwinSystem =
@@ -83,13 +98,20 @@ in {
     , nixpkgs
     , specialArgs ? { }
     }:
-    darwin.lib.darwinSystem {
+    let
+      sa = specialArgs // { inherit user; };
+    in darwin.lib.darwinSystem {
       inherit system;
-      specialArgs = specialArgs // { inherit user; };
+      specialArgs = sa;
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
-      modules = buildHostModules { inherit user hostFile; };
+      modules =
+        [ specialArgs.inputs.home-manager.darwinModules.home-manager ]
+        ++ buildHostModules {
+          inherit user hostFile;
+          hmExtraSpecialArgs = sa;
+        };
     };
 }

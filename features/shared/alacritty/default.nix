@@ -34,8 +34,8 @@
         general.live_config_reload = true;
         mouse.hide_when_typing = false;
         keyboard.bindings = [
-          # Shift+Return -> ESC + CR (\r). Nix has no \u escape, so parse via JSON.
-          { key = "Return"; mods = "Shift"; chars = builtins.fromJSON ''"\r"''; }
+          # Shift+Return -> ESC + CR (\u001B\r). Nix has no \u escape, so parse via JSON.
+          { key = "Return"; mods = "Shift"; chars = builtins.fromJSON ''"\u001B\r"''; }
         ];
       };
     };
