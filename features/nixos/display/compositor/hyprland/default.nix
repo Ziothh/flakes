@@ -1,7 +1,7 @@
 {
   features = [
     ./grim
-    ./hyprland
+    ./hyprpaper
     ./rofi
     ./swappy
     ./swaync
@@ -19,6 +19,9 @@
   };
 
   user = { ... }: {
-    home.file.".config/electron-flags.conf".source = ./electron-flags.conf;
+    home.file = {
+      ".config/hypr/hyprland.conf".source = ./hyprland.conf;
+      ".config/electron-flags.conf".source = ./electron-flags.conf;
+    };
   };
 }

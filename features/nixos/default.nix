@@ -13,6 +13,6 @@
     ./rust-dev
 
     ./obs-studio
-    ./wayland   # display tree migration in next commit; for now still here
+    ./display
   ];
 }
