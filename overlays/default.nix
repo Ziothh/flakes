@@ -18,8 +18,6 @@
           config.allowUnfree = true;
         };
     in {
-      neovim = pinned.neovim;            # 0.9.4 — current breaks plugin config
-      tree-sitter = pinned.tree-sitter;  # 0.20.8 — pairs with pinned nvim
       direnv = pinned.direnv;            # 2.32.3 — current 2.37.1 checkPhase hangs
     };
 
