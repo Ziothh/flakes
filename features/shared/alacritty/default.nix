@@ -14,7 +14,7 @@
           title = "Alacritty";
           dynamic_title = true;
           decorations_theme_variant = "Dark";
-          option_as_alt = "None";
+          option_as_alt = "Both";
         };
         scrolling.history = 5000;
         font = {
