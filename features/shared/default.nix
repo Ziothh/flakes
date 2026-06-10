@@ -91,7 +91,45 @@
     };
 
     programs.home-manager.enable = true;
-    programs.git.enable = true;
+    programs.git = {
+      enable = true;
+      userName = "Ziothh";
+      userEmail = "louisgiet.w@gmail.com";
+      signing.format = null;
+      aliases.undo = "reset --soft HEAD^";
+      # Syntax-highlighted, navigable diffs/pager. Reuses the bat theme
+      # (see features/shared/bat). delta.enable wires core.pager automatically.
+      delta = {
+        enable = true;
+        options = {
+          navigate = true; # jump between files with n / N
+          line-numbers = true;
+          syntax-theme = "Catppuccin-mocha";
+        };
+      };
+      extraConfig = {
+        # Portable behavior (moved from ambient machine-local config)
+        push.autoSetupRemote = true; # `git push` on a new branch sets upstream automatically
+        push.default = "current"; # push the current branch to its same-named remote branch
+
+        # Rebase hygiene — keep history linear, fewer accidental merge commits
+        pull.rebase = true; # `git pull` rebases instead of merging
+        rebase.autoStash = true; # auto stash/pop dirty changes around a rebase
+        rebase.autoSquash = true; # honor fixup!/squash! commits without --autosquash
+        fetch.prune = true; # drop local refs for branches deleted on the remote
+
+        # Diffs & conflicts
+        diff.algorithm = "histogram"; # smarter diffs than the default myers algorithm
+        merge.conflictStyle = "zdiff3"; # conflict markers also show the common ancestor
+        rerere.enabled = true; # remember conflict resolutions and replay them
+
+        # Quality-of-life
+        init.defaultBranch = "main"; # new repos start on `main`
+        commit.verbose = true; # show the staged diff while writing the commit message
+        branch.sort = "-committerdate"; # `git branch` lists most-recently-used first
+        help.autocorrect = "prompt"; # on a typo'd command, prompt to run the intended one
+      };
+    };
 
     home.username = "${user}";
     # Don't change without reading the HM release notes:
