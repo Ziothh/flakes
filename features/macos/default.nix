@@ -1,5 +1,6 @@
 {
   features = [
     ../shared
+    ./ssh.nix
   ];
 }
