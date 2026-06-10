@@ -93,21 +93,12 @@
     programs.home-manager.enable = true;
     programs.git = {
       enable = true;
-      userName = "Ziothh";
-      userEmail = "louisgiet.w@gmail.com";
       signing.format = null;
-      aliases.undo = "reset --soft HEAD^";
-      # Syntax-highlighted, navigable diffs/pager. Reuses the bat theme
-      # (see features/shared/bat). delta.enable wires core.pager automatically.
-      delta = {
-        enable = true;
-        options = {
-          navigate = true; # jump between files with n / N
-          line-numbers = true;
-          syntax-theme = "Catppuccin-mocha";
-        };
-      };
-      extraConfig = {
+      settings = {
+        user.name = "Ziothh";
+        user.email = "louisgiet.w@gmail.com";
+        alias.undo = "reset --soft HEAD^";
+
         # Portable behavior (moved from ambient machine-local config)
         push.autoSetupRemote = true; # `git push` on a new branch sets upstream automatically
         push.default = "current"; # push the current branch to its same-named remote branch
@@ -128,6 +119,18 @@
         commit.verbose = true; # show the staged diff while writing the commit message
         branch.sort = "-committerdate"; # `git branch` lists most-recently-used first
         help.autocorrect = "prompt"; # on a typo'd command, prompt to run the intended one
+      };
+    };
+
+    # Syntax-highlighted, navigable git diffs/pager. Reuses the bat theme
+    # (see features/shared/bat).
+    programs.delta = {
+      enable = true;
+      enableGitIntegration = true;
+      options = {
+        navigate = true; # jump between files with n / N
+        line-numbers = true;
+        syntax-theme = "Catppuccin-mocha";
       };
     };
 
