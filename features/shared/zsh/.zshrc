@@ -122,31 +122,12 @@
 
 # --------------------------------------------------------------------------
 # My stuff
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# node/pnpm/rust come from nix (nodejs_24, pnpm_10, rustup); nvm/go/bun removed.
 
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
-
-
-
-# Go
-export PATH=$PATH:/usr/local/go/bin
-export PATH="$PATH:$HOME/go/bin"
-
-# Bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# pnpm
+# pnpm — resolve `pnpm add -g` bins (pnpm itself is from nix)
 export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
-# Idk what this does
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 source ~/.config/zsh/index.zsh
